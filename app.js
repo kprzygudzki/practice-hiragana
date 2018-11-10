@@ -17,7 +17,6 @@ const guess = (entry) => {
 	else { render(state); }
 }
 const validateGuess = (guess) => guess === state.currentChar.latin;
-const guessResult = (bool) => bool ? "Good job!" : "Wrong...";
 
 const generateNext = () => {
 	state.currentChar = getNextChar(state.charsInPlay, state.currentChar);
@@ -45,10 +44,9 @@ const charDisplayRender = (char) => {
 	return '<div id="charDisplay" class="display">' + '<div id="character">' + hiraganaChar + '</div>' + '</div>';
 };
 const buttonsRender = () => {
-	if (state.currentChar === undefined) {
-		return '<div id="buttons" class="buttons">' + emptyResultTile() + skipButton() + '</div>';
-	}
-	return '<div id="buttons" class="buttons">' + resultTile(state.result) + skipButton() + guessButtons(state.charsInPlay) + '</div>'
+	const obligatoryContents = resultTile(state.result) + skipButton();
+	const contents = state.currentChar === undefined ? obligatoryContents : obligatoryContents + guessButtons(state.charsInPlay);
+	return '<div id="buttons" class="buttons">' + contents + '</div>';
 };
 const footerRender = () => '<div class="footer"></div>';
 
@@ -57,11 +55,8 @@ const guessButtons = (charGroups) => '<div id="guessButtons" class="guessButtons
 const guessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.map(char => guessButton(char)).join('') + '</div>';
 const guessButton = (char) => '<button type="button" onClick="guess(\'' + char.latin + '\')" class="guessButton">' + char.latin + '</button>';
 
-const resultTile = (result) => result === undefined ? emptyResultTile() : result ? correctResultTile() : wrongResultTile();
-const correctResultTile = () => wrapWithDiv('Good job!');
-const wrongResultTile = () => wrapWithDiv('Wrong...');
-const emptyResultTile = () => wrapWithDiv('&nbsp');
-
+const resultTile = (result) => wrapWithDiv(resultMessage(result));
+const resultMessage = (result) => result === undefined ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
 const wrapWithDiv = (text) => '<div>' + text + '</div>';
 
 const setContent = (handle, value) => {
