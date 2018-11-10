@@ -24,31 +24,53 @@ h1 {
 }
 
 .display {
-	height: 600px;
+	display: flex;
+	height: 450px;
 	font-size: 400px;
+	line-height: 1.125;
+}
+
+.display.div {
+	height: 400px;
 }
 
 .buttons {
 	font-size: 40px;
+	height: 50px;
+}
+
+button {
+	border: none;
+	background-color: #EEE;
+	height: 50px;
+	font-size: 30px;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 .guessButtons {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: space-around;
+	align-content: center;
+	width: 100%;
 }
 
 .guessButtonsGroup {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: space-around;
+	align-content: center;
+	height: 300px;
 	width: 150px;
 }
 
 .guessButton {
-	border-width: 1px;
-	border-color: #000;
-	width: 100px;
+	border: none;
+	background-color: #EEE;
+	width: 50px;
+	height: 50px;
+	align-self: center;
 }
 
 .footer {
