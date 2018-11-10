@@ -32,21 +32,22 @@ h1 {
 	font-size: 40px;
 }
 
-#generate {
-
-}
-
 .guessButtons {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: space-around;
-
 }
 
 .guessButtonsGroup {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	width: 150px;
+}
+
+.guessButton {
+	border-width: 1px;
+	border-color: #000;
 	width: 100px;
 }
 
