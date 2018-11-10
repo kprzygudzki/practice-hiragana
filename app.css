@@ -1,0 +1,39 @@
+html {
+	width: 100%;
+}
+
+h1 {
+	font-size: 90px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.container {
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: 80%;
+	grid-template-rows: 20% 40% 20% 20%;
+	grid-template-areas: 
+		"header"
+		"display"
+		"buttons"
+		"footer";
+	place-items: center;
+}
+
+.display {
+	height: 600px;
+	font-size: 400px;
+}
+
+.buttons {
+	font-size: 40px;
+}
+
+#generate {
+
+}
+
+.footer {
+}
