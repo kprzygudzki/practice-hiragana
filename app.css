@@ -1,5 +1,6 @@
 html {
 	width: 100%;
+	text-align: center;
 }
 
 h1 {
@@ -33,6 +34,20 @@ h1 {
 
 #generate {
 
+}
+
+.guessButtons {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-around;
+
+}
+
+.guessButtonsGroup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100px;
 }
 
 .footer {

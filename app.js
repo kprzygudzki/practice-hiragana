@@ -21,10 +21,10 @@ const chars = [[
 		new Char('か', 'ka'), new Char('き', 'ki'), new Char('く', 'ku'),
 		new Char('け', 'ke'), new Char('こ', 'ko')
 ]];
-const charsInPlay = flattenArrayOfArrays(chars);
+const charsInPlay = chars;
 
 const generateNext = () => {
-	currentChar = randomElement(charsInPlay);
+	currentChar = randomElement(flattenArrayOfArrays(chars));
 	elementHandle.innerHTML = currentChar.hiragana;
 	guessButtonsHandle.innerHTML = guessButtons(charsInPlay);
 }
@@ -42,5 +42,6 @@ var currentChar;
 
 const buttons = (subcomponents) => '<div id="result"></div>' + subcomponents();
 const generateButton = () => '<div id="generate" onclick="generateNext()">Generate</div>';
-const guessButtons = (chars) => chars.map(char => guessButton(char)).join('');
+const guessButtons = (charGroups) => chars.map(charGroup => guessButtonGroup(charGroup)).join('');
+const guessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.map(char => guessButton(char)).join('') + '</div>';
 const guessButton = (char) => '<div onClick="guess(\'' + char.latin + '\')">' + char.latin + '</div>';
