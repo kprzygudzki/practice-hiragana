@@ -1,5 +1,6 @@
 export { initialize, render };
 import { Char, allChars } from './chars.js';
+import { Header, Footer, CharDisplay, Buttons } from './components.js';
 
 let state = {
 	currentChar: undefined,
@@ -14,8 +15,7 @@ const initialize = (registerCallback, updateHandler) => {
 	updateContainer = updateHandler;
 };
 
-const render = () =>
- headerRender() + charDisplayRender(state.currentChar) + buttonsRender(state) + footerRender();
+const render = () => Header() + CharDisplay(state.currentChar) + Buttons(state) + Footer();
 
 const updateState = (stateUpdater) => {
 	state = stateUpdater(state);
@@ -45,26 +45,27 @@ const getNextChar = (charsInPlay, currentChar) => {
 	return element ? element : currentChar;
 };
 
-const headerRender = () => '<div class="header"><h1>Hiragana Practice</h1></div>';
-const charDisplayRender = (char) => {
-	const hiraganaChar = char ? char.hiragana : '&nbsp;';
-	return '<div id="charDisplay" class="display">' + '<div id="character">' + hiraganaChar + '</div>' + '</div>';
-};
-const buttonsRender = (state) => {
-	const obligatoryContents = resultTile(state.result) + skipButton();
-	const contents = state.currentChar ? obligatoryContents + guessButtons(state.charsInPlay) : obligatoryContents;
-	return '<div id="buttons" class="buttons">' + contents + '</div>';
-};
-const footerRender = () => '<div class="footer"></div>';
+// const Header = () => '<div class="header"><h1>Hiragana Practice</h1></div>';
+// const Footer = () => '<div class="footer"></div>';
 
-const skipButton = () => '<button id="generate" onclick="skip()">Generate</button>';
-const guessButtons = (charGroups) => '<div id="guessButtons" class="guessButtons">' + charGroups.map(charGroup => guessButtonGroup(charGroup)).join('') + '</div>';
-const guessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.map(char => guessButton(char)).join('') + '</div>';
-const guessButton = (char) => '<button type="button" onClick="guess(\'' + char.latin + '\')" class="guessButton">' + char.latin + '</button>';
+// const CharDisplay = (char) => {
+// 	const hiraganaChar = char ? char.hiragana : '&nbsp;';
+// 	return '<div id="charDisplay" class="display">' + '<div id="character">' + hiraganaChar + '</div>' + '</div>';
+// };
+// const Buttons = (state) => {
+// 	const obligatoryContents = ResultTile(state.result) + SkipButton();
+// 	const contents = state.currentChar ? obligatoryContents + GuessButtons(state.charsInPlay) : obligatoryContents;
+// 	return '<div id="buttons" class="buttons">' + contents + '</div>';
+// };
 
-const resultTile = (result) => wrapWithDiv(resultMessage(result));
-const resultMessage = (result) => typeof result === 'undefined' ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
-const wrapWithDiv = (text) => '<div>' + text + '</div>';
+// const SkipButton = () => '<button id="generate" onclick="skip()">Generate</button>';
+// const GuessButtons = (charGroups) => '<div id="guessButtons" class="guessButtons">' + charGroups.map(charGroup => GuessButtonGroup(charGroup)).join('') + '</div>';
+// const GuessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.map(char => GuessButton(char)).join('') + '</div>';
+// const GuessButton = (char) => '<button type="button" onClick="guess(\'' + char.latin + '\')" class="guessButton">' + char.latin + '</button>';
+
+// const ResultTile = (result) => wrapWithDiv(resultMessage(result));
+// const resultMessage = (result) => typeof result === 'undefined' ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
+// const wrapWithDiv = (text) => '<div>' + text + '</div>';
 
 const getRandom = (max) => Math.floor(Math.random() * Math.floor(max));
 const randomElement = (array) => array[getRandom(array.length)];
