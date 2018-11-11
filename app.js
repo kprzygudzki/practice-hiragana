@@ -1,14 +1,25 @@
-import { Char, allChars } from './chars.js'
+export { initialize, render };
+import { Char, allChars } from './chars.js';
 
 let state = {
 	currentChar: undefined,
 	charsInPlay: allChars,
 	result: undefined
 };
+let updateContainer;
+
+const initialize = (registerCallback, updateHandler) => {
+	registerCallback('skip', skip);
+	registerCallback('guess', guess);
+	updateContainer = updateHandler;
+};
+
+const render = () =>
+ headerRender() + charDisplayRender(state.currentChar) + buttonsRender(state) + footerRender();
 
 const updateState = (stateUpdater) => {
 	state = stateUpdater(state);
-	render(state);
+	updateContainer();
 };
 
 const setNextChar = () => setChar(getNextChar(state.charsInPlay, state.currentChar));
@@ -34,16 +45,6 @@ const getNextChar = (charsInPlay, currentChar) => {
 	return element ? element : currentChar;
 };
 
-const containerHandle = document.getElementById("container");
-
-const render = (state) => {
-	const output = containerRender(state);
-	setContent(containerHandle, output);
-};
-
-const containerRender = (state) => {
-	return headerRender() + charDisplayRender(state.currentChar) + buttonsRender(state) + footerRender()
-};
 const headerRender = () => '<div class="header"><h1>Hiragana Practice</h1></div>';
 const charDisplayRender = (char) => {
 	const hiraganaChar = char ? char.hiragana : '&nbsp;';
@@ -65,15 +66,6 @@ const resultTile = (result) => wrapWithDiv(resultMessage(result));
 const resultMessage = (result) => typeof result === 'undefined' ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
 const wrapWithDiv = (text) => '<div>' + text + '</div>';
 
-const setContent = (handle, value) => {
-	handle.innerHTML = value;
-};
-
 const getRandom = (max) => Math.floor(Math.random() * Math.floor(max));
 const randomElement = (array) => array[getRandom(array.length)];
 const flattenArrayOfArrays = (array) => array.reduce((acc, el) => [...acc, ...el])
-
-window.skip = skip;
-window.guess = guess;
-
-render(state);
