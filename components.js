@@ -1,4 +1,4 @@
-export { Header, Footer, CharDisplay, Buttons };
+export { Header, Footer, CharDisplay, Buttons, Result };
 
 const Header = () => '<div class="header"><h1>Hiragana Practice</h1></div>';
 const Footer = () => '<div class="footer"></div>';
@@ -20,5 +20,18 @@ const GuessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.ma
 const GuessButton = (char) => '<button type="button" onClick="guess(\'' + char.latin + '\')" class="guessButton">' + char.latin + '</button>';
 
 const ResultTile = (result) => wrapWithDiv(resultMessage(result));
-const resultMessage = (result) => typeof result === 'undefined' ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
+const resultMessage = (result) => {
+	switch (result) {
+		case Result.CORRECT: return 'Good job!';
+		case Result.WRONG: return 'Wrong...';
+		default: console.error('Could not prapare message for provided result type');
+		case Result.NONE: return '&nbsp';
+	};
+};
 const wrapWithDiv = (text) => '<div>' + text + '</div>';
+
+const Result = Object.freeze({
+    CORRECT:	Symbol("correct"),
+    WRONG:		Symbol("wrong"),
+    NONE:			Symbol("none")
+});
