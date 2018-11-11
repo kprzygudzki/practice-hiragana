@@ -1,27 +1,34 @@
 import { Char, allChars } from './chars.js'
 
-const state = {
+let state = {
 	currentChar: undefined,
 	charsInPlay: allChars,
 	result: undefined
 };
 
+const updateState = (stateUpdater) => {
+	state = stateUpdater(state);
+	render(state);
+};
+
+const setNextChar = () => setChar(getNextChar(state.charsInPlay, state.currentChar));
+const setChar = (char) => updateState(state => ({ ...state, currentChar: char }));
+const setResult = (result) => updateState(state => ({ ...state, result: result }));
+const eraseResult = () => setResult(undefined);
+
 const skip = () => {
-	state.result = undefined;
-	generateNext();
-}
+	eraseResult();
+	setNextChar();
+};
 const guess = (entry) => {
 	const isAnswerCorrect = validateGuess(entry);
-	state.result = isAnswerCorrect;
-	if (isAnswerCorrect) { generateNext(); }
-	else { render(state); }
-}
+	setResult(isAnswerCorrect);
+	if (isAnswerCorrect) {
+		setNextChar();
+	}
+};
 const validateGuess = (guess) => guess === state.currentChar.latin;
 
-const generateNext = () => {
-	state.currentChar = getNextChar(state.charsInPlay, state.currentChar);
-	render(state);
-}
 const getNextChar = (charsInPlay, currentChar) => {
 	const element = randomElement(flattenArrayOfArrays(charsInPlay).filter(char => char !== currentChar));
 	return element ? element : currentChar;
@@ -32,20 +39,19 @@ const containerHandle = document.getElementById("container");
 const render = (state) => {
 	const output = containerRender(state);
 	setContent(containerHandle, output);
-}
-
-const containerRender = (state) => {
-	return headerRender() + charDisplayRender(state.currentChar) + buttonsRender() + footerRender()
 };
 
+const containerRender = (state) => {
+	return headerRender() + charDisplayRender(state.currentChar) + buttonsRender(state) + footerRender()
+};
 const headerRender = () => '<div class="header"><h1>Hiragana Practice</h1></div>';
 const charDisplayRender = (char) => {
 	const hiraganaChar = char ? char.hiragana : '&nbsp;';
 	return '<div id="charDisplay" class="display">' + '<div id="character">' + hiraganaChar + '</div>' + '</div>';
 };
-const buttonsRender = () => {
+const buttonsRender = (state) => {
 	const obligatoryContents = resultTile(state.result) + skipButton();
-	const contents = state.currentChar === undefined ? obligatoryContents : obligatoryContents + guessButtons(state.charsInPlay);
+	const contents = state.currentChar ? obligatoryContents + guessButtons(state.charsInPlay) : obligatoryContents;
 	return '<div id="buttons" class="buttons">' + contents + '</div>';
 };
 const footerRender = () => '<div class="footer"></div>';
@@ -56,7 +62,7 @@ const guessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.ma
 const guessButton = (char) => '<button type="button" onClick="guess(\'' + char.latin + '\')" class="guessButton">' + char.latin + '</button>';
 
 const resultTile = (result) => wrapWithDiv(resultMessage(result));
-const resultMessage = (result) => result === undefined ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
+const resultMessage = (result) => typeof result === 'undefined' ? '&nbsp' : result ? 'Good job!' : 'Wrong...';
 const wrapWithDiv = (text) => '<div>' + text + '</div>';
 
 const setContent = (handle, value) => {
