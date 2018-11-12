@@ -5,12 +5,12 @@ const Footer = () => '<div class="footer"></div>';
 
 const CharDisplay = (char) => {
 	const hiraganaChar = char ? char.hiragana : '&nbsp;';
-	return '<div id="charDisplay" class="display">' + '<div id="character">' + hiraganaChar + '</div>' + '</div>';
+	return '<div class="display">' + '<div>' + hiraganaChar + '</div>' + '</div>';
 };
 const Buttons = (state) => {
 	const obligatoryContents = ResultTile(state.result) + SkipButton();
 	const contents = state.currentChar ? obligatoryContents + GuessButtons(state.charsInPlay) : obligatoryContents;
-	return '<div id="buttons" class="buttons">' + contents + '</div>';
+	return '<div class="buttons">' + contents + '</div>';
 };
 
 const SkipButton = () => '<button onclick="skip()">Generate</button>';
