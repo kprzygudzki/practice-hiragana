@@ -13,9 +13,9 @@ const Buttons = (state) => {
 	return '<div id="buttons" class="buttons">' + contents + '</div>';
 };
 
-const SkipButton = () => '<button id="generate" onclick="skip()">Generate</button>';
+const SkipButton = () => '<button onclick="skip()">Generate</button>';
 
-const GuessButtons = (charGroups) => '<div id="guessButtons" class="guessButtons">' + charGroups.map(charGroup => GuessButtonGroup(charGroup)).join('') + '</div>';
+const GuessButtons = (charGroups) => '<div class="guessButtons">' + charGroups.map(charGroup => GuessButtonGroup(charGroup)).join('') + '</div>';
 const GuessButtonGroup = (chars) => '<div class="guessButtonsGroup">' + chars.map(char => GuessButton(char)).join('') + '</div>';
 const GuessButton = (char) => '<button type="button" onClick="guess(\'' + char.latin + '\')" class="guessButton">' + char.latin + '</button>';
 
