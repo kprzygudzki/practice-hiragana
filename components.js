@@ -15,7 +15,7 @@ const Footer = () => {
 };
 
 const CharDisplay = (char) => {
-	const hiraganaChar = char ? char.hiragana : '\u00A0';
+	const hiraganaChar = char ? char.hiragana : nonBreakingSpace;
 	const div = document.createElement('div');
 	div.className = 'display';
 	div.appendChild(document.createTextNode(hiraganaChar));
@@ -75,7 +75,7 @@ const resultMessage = (result) => {
 		case Result.CORRECT: return 'Good job!';
 		case Result.WRONG: return 'Wrong...';
 		default: console.error('Could not prapare message for provided result type');
-		case Result.NONE: return '\u00A0';
+		case Result.NONE: return nonBreakingSpace;
 	};
 };
 const wrapWithDiv = (text) => {
@@ -89,3 +89,5 @@ const Result = Object.freeze({
     WRONG:		Symbol("wrong"),
     NONE:			Symbol("none")
 });
+
+const nonBreakingSpace = '\u00A0';
