@@ -19,4 +19,7 @@ const allChars = [[
 	], [
 		new Char('た', 'ta'), new Char('ち', 'chi'), new Char('つ', 'tsu'),
 		new Char('て', 'te'), new Char('と', 'to')
+	], [
+		new Char('な', 'na'), new Char('に', 'ni'), new Char('ぬ', 'nu'),
+		new Char('ね', 'ne'), new Char('の', 'no')
 ]];
