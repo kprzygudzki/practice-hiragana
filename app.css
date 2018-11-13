@@ -11,11 +11,12 @@ h1 {
 }
 
 .container {
-	display: grid;
+	display: flex;
+	flex-flow: column nowrap;
 	justify-content: center;
-	align-content: center;
-	grid-template-columns: 80%;
-	place-items: center;
+	align-items: center;
+	margin-left: 20%;
+	margin-right: 20%;
 }
 
 .display {
@@ -31,6 +32,9 @@ h1 {
 
 .buttons {
 	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
 	font-size: 40px;
 }
 

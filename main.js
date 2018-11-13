@@ -2,7 +2,8 @@ export { updateContainer, registerCallback };
 import { initialize, render } from './app.js';
 
 const updateContainer = () => {
-	document.getElementById("container").innerHTML = render();
+	const oldContainer = document.getElementById('container');
+	document.body.replaceChild(render(), oldContainer);
 };
 
 const registerCallback = (name, callback) => {

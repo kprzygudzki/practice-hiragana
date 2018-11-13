@@ -8,13 +8,21 @@ let state = {
 };
 let updateContainer;
 
-export const initialize = (registerCallback, updateHandler) => {
-	registerCallback('skip', skip);
-	registerCallback('guess', guess);
+export const initialize = (callbackRegisterer, updateHandler) => {
+	callbackRegisterer('skip', skip);
+	callbackRegisterer('guess', guess);
 	updateContainer = updateHandler;
 };
 
-export const render = () => Header() + CharDisplay(state.currentChar) + Buttons(state) + Footer();
+export const render = () => {
+	const div = document.createElement('div');
+	div.id = 'container';
+	div.className = 'container';
+	[Header(), CharDisplay(state.currentChar), Buttons(state, skip, guess), Footer()]
+		.forEach(it => div.appendChild(it));
+	console.log(div);
+	return div;
+};
 
 const updateState = (stateUpdater) => {
 	state = stateUpdater(state);
@@ -27,10 +35,12 @@ const setResult = (result) => updateState(state => ({ ...state, result: result }
 const eraseResult = () => setResult(Result.NONE);
 
 const skip = () => {
+	console.log('called skip');
 	eraseResult();
 	setNextChar();
 };
 const guess = (entry) => {
+	console.log('called guess with parameter', entry);
 	const isAnswerCorrect = validateGuess(entry);
 	setResult(resultFrom(isAnswerCorrect));
 	if (isAnswerCorrect) {
