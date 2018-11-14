@@ -1,5 +1,5 @@
 export { updateContainer, registerCallback };
-import { initialize, render } from './app.js';
+import { initialize, render } from './container.js';
 
 const updateContainer = () => {
 	const oldContainer = document.getElementById('container');
