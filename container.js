@@ -16,11 +16,9 @@ export const initialize = (callbackRegisterer, updateHandler) => {
 
 export const render = () => {
 	const div = document.createElement('div');
-	div.id = 'container';
 	div.className = 'container';
 	[Header(), CharDisplay(state.currentChar), Buttons(state, skip, guess), Footer()]
 		.forEach(it => div.appendChild(it));
-	console.log(div);
 	return div;
 };
 
