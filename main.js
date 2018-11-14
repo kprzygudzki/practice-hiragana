@@ -6,7 +6,7 @@ const updateContainer = () => {
 	const oldContainer = document.getElementById(containerId);
 	const newContainer = render();
 	newContainer.id = containerId;
-	document.body.replaceChild(render(), oldContainer);
+	document.body.replaceChild(newContainer, oldContainer);
 };
 
 const registerCallback = (name, callback) => {
