@@ -30,4 +30,7 @@ const allChars = [[
 		new Char('め', 'me'), new Char('も', 'mo')
 	], [
 		new Char('や', 'ya'), new Char('ゆ', 'yu'), new Char('よ', 'yo')
+	], [
+		new Char('ら', 'ra'), new Char('り', 'ri'), new Char('る', 'ru'),
+		new Char('れ', 're'), new Char('ろ', 'ro')
 ]];
