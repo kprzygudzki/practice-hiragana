@@ -28,14 +28,6 @@ h1 {
 	height: 400px;
 }
 
-.buttons {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: center;
-	align-items: center;
-	font-size: 40px;
-}
-
 button {
 	border: none;
 	background-color: #EEE;
@@ -46,12 +38,20 @@ button {
 	cursor: pointer;
 }
 
+.buttons {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	font-size: 40px;
+}
+
 .guessButtons {
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: space-around;
 	align-content: center;
-	width: 100%;
+	width: 600px;
 }
 
 .guessButtonsGroup {
@@ -60,7 +60,6 @@ button {
 	justify-content: space-around;
 	align-content: center;
 	height: 300px;
-	width: 150px;
 }
 
 .guessButton {
