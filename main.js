@@ -10,3 +10,18 @@ const updateContainer = () => {
 
 initialize(updateContainer);
 updateContainer();
+
+let input = "";
+const parse = (letters, letter) => {
+	if (!isCharacter(letter)) {
+		return letters;
+	};
+	const newLetters = letters.slice(-2) + letter;
+};
+const isCharacter = (key) =>
+ (key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z')
+
+document.addEventListener('keydown', event => {
+	input = parse(input, event.key);
+	console.log(input);
+});
