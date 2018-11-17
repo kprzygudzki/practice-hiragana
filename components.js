@@ -1,4 +1,4 @@
-export { Header, Footer, CharDisplay, Buttons, Result };
+export { Header, Footer, CharDisplay, Buttons, Result, Font };
 
 const Header = () => {
 	const div = document.createElement('div');
@@ -14,11 +14,13 @@ const Footer = () => {
 	return div;
 };
 
-const CharDisplay = (char) => {
+const CharDisplay = (char, font, clickHandler) => {
 	const hiraganaChar = char ? char.hiragana : nonBreakingSpace;
 	const div = document.createElement('div');
 	div.className = 'display';
+	div.style['font-family'] = font;
 	div.appendChild(document.createTextNode(hiraganaChar));
+	div.onclick = clickHandler;
 	return div;
 };
 const Buttons = (state, skipHandler, guessHandler) => {
@@ -85,9 +87,14 @@ const wrapWithDiv = (text) => {
 };
 
 const Result = Object.freeze({
-    CORRECT:	Symbol("correct"),
-    WRONG:		Symbol("wrong"),
-    NONE:			Symbol("none")
+	CORRECT: Symbol("correct"),
+	WRONG: Symbol("wrong"),
+	NONE: Symbol("none")
+});
+
+const Font = Object.freeze({
+	SERIF: 'serif',
+	SANS_SERIF: 'sans-serif'
 });
 
 const nonBreakingSpace = '\u00A0';
