@@ -56,7 +56,7 @@ button {
 .guessButtonsGroup {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-content: center;
 	height: 300px;
 }
