@@ -9,9 +9,7 @@ let state = {
 };
 let updateContainer;
 
-export const initialize = (callbackRegisterer, updateHandler) => {
-	callbackRegisterer('skip', skip);
-	callbackRegisterer('guess', guess);
+export const initialize = (updateHandler) => {
 	updateContainer = updateHandler;
 };
 

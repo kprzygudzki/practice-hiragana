@@ -1,4 +1,3 @@
-export { updateContainer, registerCallback };
 import { initialize, render } from './container.js';
 
 const updateContainer = () => {
@@ -9,9 +8,5 @@ const updateContainer = () => {
 	document.body.replaceChild(newContainer, oldContainer);
 };
 
-const registerCallback = (name, callback) => {
-	window[name] = callback;
-};
-
-initialize(registerCallback, updateContainer);
+initialize(updateContainer);
 updateContainer();

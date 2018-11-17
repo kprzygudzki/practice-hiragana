@@ -62,7 +62,7 @@ const GuessButtonGroup = (chars, guessHandler) => {
 const GuessButton = (char, guessHandler) => {
 	const button = document.createElement('button');
 	button.className = 'guessButton';
-	button.onclick = () => guess(char.latin);
+	button.onclick = () => guessHandler(char.latin);
 	button.appendChild(document.createTextNode(char.latin));
 	return button;
 };
