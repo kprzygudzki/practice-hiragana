@@ -52,8 +52,9 @@ const resultFrom = (bool) => bool ? Result.CORRECT : Result.WRONG;
 const getNextChar = (charsInPlay, currentChar) => getNextElement(flattenArrayOfArrays(charsInPlay), currentChar);
 
 const getNextElement = (elements, currentElement) => {
-	const newElement = randomElement(elements.filter(element => element !== currentElement));
-	return newElement ? newElement : currentElement;
+	return elements.length < 2 ?
+		currentElement :
+		randomElement(elements.filter(element => element !== currentElement));
 };
 const randomElement = (array) => array[getRandom(array.length)];
 const getRandom = (max) => Math.floor(Math.random() * Math.floor(max));
